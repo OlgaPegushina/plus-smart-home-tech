@@ -123,12 +123,4 @@ public interface EventMapper {
     @ToPayload
     @Mapping(target = "name", source = "name")
     ScenarioRemovedEventAvro toPayload(ScenarioRemovedEvent event);
-
-    /*@ToPayload
-    @Mapping(target = "sensorId", source = "sensorId")
-    ScenarioConditionAvro toPayload(ScenarioCondition condition);
-
-    @ToPayload
-    @Mapping(target = "sensorId", source = "sensorId")
-    DeviceActionAvro toPayload(DeviceAction action);*/
 }
