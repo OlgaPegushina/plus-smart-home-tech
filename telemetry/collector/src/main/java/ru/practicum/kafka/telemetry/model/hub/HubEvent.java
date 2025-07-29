@@ -24,7 +24,8 @@ import java.time.Instant;
         use = JsonTypeInfo.Id.NAME,
         include = JsonTypeInfo.As.EXISTING_PROPERTY,
         property = "type",
-        defaultImpl = HubEventType.class
+        // defaultImpl = HubEventType.class,
+        visible = true
 )
 @JsonSubTypes({
         @JsonSubTypes.Type(value = DeviceAddedEvent.class, name = "DEVICE_ADDED"),
@@ -37,7 +38,7 @@ public abstract class HubEvent {
     @NotBlank
     String hubId;
 
-    final Instant timestamp = Instant.now();
+    Instant timestamp = Instant.now();
 
     @NotNull
     HubEventType type;

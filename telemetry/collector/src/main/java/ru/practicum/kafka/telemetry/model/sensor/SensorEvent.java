@@ -3,7 +3,6 @@ package ru.practicum.kafka.telemetry.model.sensor;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -41,11 +40,7 @@ public abstract class SensorEvent {
     @NotBlank
     String hubId;
 
-    final Instant timestamp = Instant.now();
+    Instant timestamp = Instant.now();
 
-    @NotNull
-    SensorEventType type;
-
-    @NotNull
     public abstract SensorEventType getType();
 }
