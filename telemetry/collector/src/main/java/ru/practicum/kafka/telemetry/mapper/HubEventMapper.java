@@ -34,7 +34,7 @@ public class HubEventMapper {
 
     public static SpecificRecordBase mapToPayload(HubEvent hubEvent) {
         if (hubEvent.getType() == null) {
-            throw new IllegalArgumentException("HubEvent type cannot be null");
+            throw new IllegalArgumentException("Тип не может быть null");
         }
         return switch (hubEvent.getType()) {
             case DEVICE_ADDED -> {

@@ -8,8 +8,6 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import ru.practicum.kafka.telemetry.config.TelemetryKafkaProducerConfig;
 import ru.practicum.kafka.telemetry.mapper.EventMapper;
-import ru.practicum.kafka.telemetry.mapper.HubEventMapper;
-import ru.practicum.kafka.telemetry.mapper.SensorEventMapper;
 import ru.practicum.kafka.telemetry.model.hub.HubEvent;
 import ru.practicum.kafka.telemetry.model.hub.impl.DeviceAddedEvent;
 import ru.practicum.kafka.telemetry.model.hub.impl.DeviceRemovedEvent;
@@ -28,6 +26,7 @@ import ru.yandex.practicum.kafka.telemetry.event.SensorEventAvro;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @Slf4j
 @RequiredArgsConstructor
+@SuppressWarnings("unused")
 public class CollectorServiceImpl implements CollectorService {
     KafkaTemplate<String, Object> kafkaTemplate;
     EventMapper eventMapper;
@@ -38,22 +37,22 @@ public class CollectorServiceImpl implements CollectorService {
         String sensorTopic = config.getSensorTopic();
 
         SensorEventAvro avroSensorEvent = switch (sensorEvent) {
-            /*case ClimateSensorEvent climateEvent -> eventMapper.toAvro(climateEvent);
+            case ClimateSensorEvent climateEvent -> eventMapper.toAvro(climateEvent);
             case LightSensorEvent lightEvent -> eventMapper.toAvro(lightEvent);
             case MotionSensorEvent motionEvent -> eventMapper.toAvro(motionEvent);
             case SwitchSensorEvent switchEvent -> eventMapper.toAvro(switchEvent);
             case TemperatureSensorEvent temperatureEvent -> eventMapper.toAvro(temperatureEvent);
             default ->
                     throw new IllegalArgumentException("Неподдерживаемый тип сенсорного события: "
-                                                       + sensorEvent.getType());*/
-            case ClimateSensorEvent climateEvent -> SensorEventMapper.mapToAvro(climateEvent);
+                                                       + sensorEvent.getType());
+            /*case ClimateSensorEvent climateEvent -> SensorEventMapper.mapToAvro(climateEvent);
             case LightSensorEvent lightEvent -> SensorEventMapper.mapToAvro(lightEvent);
             case MotionSensorEvent motionEvent -> SensorEventMapper.mapToAvro(motionEvent);
             case SwitchSensorEvent switchEvent -> SensorEventMapper.mapToAvro(switchEvent);
             case TemperatureSensorEvent temperatureEvent -> SensorEventMapper.mapToAvro(temperatureEvent);
             default ->
                     throw new IllegalArgumentException("Неподдерживаемый тип сенсорного события: "
-                                                       + sensorEvent.getType());
+                                                       + sensorEvent.getType());*/
         };
 
         log.info("В топик: {} отправляется сенсорное событие: {}", sensorTopic, avroSensorEvent);
@@ -76,16 +75,16 @@ public class CollectorServiceImpl implements CollectorService {
     public void sendHubEvent(HubEvent hubEvent) {
         String hubTopic = config.getHubTopic();
         HubEventAvro avroHubEvent = switch (hubEvent) {
-           /* case DeviceAddedEvent deviceAddedEvent -> eventMapper.toAvro(deviceAddedEvent);
+            case DeviceAddedEvent deviceAddedEvent -> eventMapper.toAvro(deviceAddedEvent);
             case DeviceRemovedEvent deviceRemovedEvent -> eventMapper.toAvro(deviceRemovedEvent);
             case ScenarioAddedEvent scenarioAddedEvent -> eventMapper.toAvro(scenarioAddedEvent);
             case ScenarioRemovedEvent scenarioRemovedEvent -> eventMapper.toAvro(scenarioRemovedEvent);
-            default -> throw new IllegalArgumentException("Неподдерживаемый тип события хаба: " + hubEvent.getType());*/
-            case DeviceAddedEvent deviceAddedEvent -> HubEventMapper.mapToAvro(deviceAddedEvent);
+            default -> throw new IllegalArgumentException("Неподдерживаемый тип события хаба: " + hubEvent.getType());
+            /*case DeviceAddedEvent deviceAddedEvent -> HubEventMapper.mapToAvro(deviceAddedEvent);
             case DeviceRemovedEvent deviceRemovedEvent -> HubEventMapper.mapToAvro(deviceRemovedEvent);
             case ScenarioAddedEvent scenarioAddedEvent -> HubEventMapper.mapToAvro(scenarioAddedEvent);
             case ScenarioRemovedEvent scenarioRemovedEvent -> HubEventMapper.mapToAvro(scenarioRemovedEvent);
-            default -> throw new IllegalArgumentException("Неподдерживаемый тип события хаба: " + hubEvent.getType());
+            default -> throw new IllegalArgumentException("Неподдерживаемый тип события хаба: " + hubEvent.getType());*/
         };
 
         log.info("В топик: {} отправляется событие хаба: {}", hubTopic, avroHubEvent);

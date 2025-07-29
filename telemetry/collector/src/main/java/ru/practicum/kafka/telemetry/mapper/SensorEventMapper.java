@@ -25,6 +25,9 @@ public class SensorEventMapper {
     }
 
     public static SpecificRecordBase mapToPayload(SensorEvent sensorEvent) {
+        if (sensorEvent.getType() == null) {
+            throw new IllegalArgumentException("Тип не может быть null");
+        }
         return switch (sensorEvent.getType()) {
             case CLIMATE_SENSOR_EVENT -> {
                 ClimateSensorEvent climateEvent = (ClimateSensorEvent) sensorEvent;
