@@ -42,7 +42,7 @@ public class TelemetryKafkaProducerConfig {
         configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, keySerializer);
         configProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, valueSerializer);
 
-        log.info("Создание ProducerFactory с конфигурацией: {}", configProps);
+        log.debug("Создание ProducerFactory с конфигурацией: {}", configProps);
 
         return new DefaultKafkaProducerFactory<>(configProps);
     }
