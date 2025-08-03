@@ -53,11 +53,11 @@ public class CollectorServiceImpl implements CollectorService {
         kafkaTemplate.send(sensorTopic, null, eventTimestamp, avroSensorEvent.getHubId(), avroSensorEvent)
                 .whenComplete((result, exception) -> {
                     if (exception == null) {
-                        log.info("Событие сенсора для hubId: {} успешно отправлено, смещение: {}",
-                                avroSensorEvent.getHubId(), result.getRecordMetadata().offset());
+                        log.info("Событие сенсора: {} для hubId: {} успешно отправлено, смещение: {}",
+                                sensorEvent, avroSensorEvent.getHubId(), result.getRecordMetadata().offset());
                     } else {
-                        log.error("Не удалось отправить событие сенсора для hubId: {}: {}",
-                                avroSensorEvent.getHubId(), exception.getMessage());
+                        log.error("Не удалось отправить событие сенсора: {} для hubId: {}: {}",
+                                sensorEvent, avroSensorEvent.getHubId(), exception.getMessage());
                     }
                 });
     }
@@ -80,11 +80,11 @@ public class CollectorServiceImpl implements CollectorService {
         kafkaTemplate.send(hubTopic, null, eventTimestamp, avroHubEvent.getHubId(), avroHubEvent)
                 .whenComplete((result, exception) -> {
                     if (exception == null) {
-                        log.info("Событие хаба для hubId: {} успешно отправлено, смещение: {}",
-                                avroHubEvent.getHubId(), result.getRecordMetadata().offset());
+                        log.info("Событие хаба: {} для hubId: {} успешно отправлено, смещение: {}",
+                                hubEvent, avroHubEvent.getHubId(), result.getRecordMetadata().offset());
                     } else {
-                        log.error("Не удалось отправить событие хаба для hubId: {}: {}",
-                                avroHubEvent.getHubId(), exception.getMessage());
+                        log.error("Не удалось отправить событие хаба: {} для hubId: {}: {}",
+                                hubEvent, avroHubEvent.getHubId(), exception.getMessage());
                     }
                 });
     }
