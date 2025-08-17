@@ -49,7 +49,7 @@ public class TelemetryKafkaProducerConfig {
 
     @Bean
     public KafkaTemplate<String, Object> kafkaTemplate() {
-        log.info("Создание KafkaTemplate для отправки сообщений на темы: {} и {}", sensorTopic, hubTopic);
+        log.debug("Создание KafkaTemplate для отправки сообщений на темы: {} и {}", sensorTopic, hubTopic);
 
         return new KafkaTemplate<>(producerFactory());
     }
