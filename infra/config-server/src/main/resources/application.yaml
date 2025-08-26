@@ -10,7 +10,7 @@ spring:
           searchLocations:
             - classpath:config/telemetry/{application}
 server:
-  port: 0
+  port: 8888
 eureka:
   client:
     serviceUrl:
