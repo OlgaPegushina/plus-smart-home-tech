@@ -9,6 +9,7 @@ import ru.practicum.analyzer.config.KafkaConsumerConfig;
 @SpringBootApplication
 @EnableConfigurationProperties(KafkaConsumerConfig.class)
 @ConfigurationPropertiesScan
+
 public class Analyzer {
     public static void main(String[] args) {
         SpringApplication.run(Analyzer.class, args);
