@@ -19,22 +19,11 @@ public interface ProductMapper {
 
     ProductDto toDto(Product entity);
 
-    List<ProductDto> toDtoList(List<Product> entities);
-
-    List<Product> toEntityList(List<ProductDto> dtos);
-
     default Page<ProductDto> toDtoPage(Page<Product> entityPage) {
         List<ProductDto> dtos = entityPage.getContent().stream()
                 .map(this::toDto)
                 .collect(Collectors.toList());
         return new PageImpl<>(dtos, entityPage.getPageable(), entityPage.getTotalElements());
-    }
-
-    default Page<Product> toEntityPage(Page<ProductDto> dtoPage) {
-        List<Product> entities = dtoPage.getContent().stream()
-                .map(this::toEntity)
-                .collect(Collectors.toList());
-        return new PageImpl<>(entities, dtoPage.getPageable(), dtoPage.getTotalElements());
     }
 
     @Mapping(target = "productId", ignore = true)
