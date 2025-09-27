@@ -35,13 +35,6 @@ public interface WarehouseContract {
     @PostMapping("/shipped")
     void shippedToDelivery(@Valid @RequestBody ShippedToDeliveryRequestDto shippedToDeliveryRequestDto);
 
-    /* @PostMapping("/return")
-     public void returnProductsToWarehouse(@RequestBody
-                     @NotEmpty(message = "Карта возвращаемых продуктов не может быть пустой")
-                     Map<@NotNull(message = "ID продукта не может быть null") UUID,
-                     @NotNull(message = "Количество не может быть null")
-                     @Positive(message = "Количество для возврата должно быть положительным числом") Long> returnProducts);
- */
     @PostMapping("/return")
     void returnProductsToWarehouse(@RequestBody @NotEmpty Map<@NotNull UUID, @NotNull @Positive Long> returnProducts);
 

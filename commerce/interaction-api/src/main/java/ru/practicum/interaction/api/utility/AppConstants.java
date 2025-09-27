@@ -4,8 +4,6 @@ import java.math.BigDecimal;
 
 public final class AppConstants {
     private AppConstants() {
-        //-- Запрет инстанцирования
-        throw new IllegalStateException("Класс констант");
     }
 
     public static final BigDecimal NDS_RATE = BigDecimal.valueOf(0.10);
